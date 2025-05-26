@@ -1,12 +1,9 @@
 # VIGENERE-CIPHER
-## EX. NO: 1(D)
+## EX. NO: 4
  
 
 ## IMPLEMETATION OF VIGENERE CIPHER
- 
-
 ## AIM:
-
 To implement the Vigenere Cipher substitution technique using C program.
 
 ## DESCRIPTION:
@@ -30,62 +27,27 @@ STEP-8: Repeat the above steps to generate the entire cipher text.
 
 
 ## PROGRAM
-```
-PROGRAM:
-#include <stdio.h>
-#include <string.h>
-// Function to perform Vigenere encryption
-void vigenereEncrypt(char *text, const char *key) {
-    int textLen = strlen(text);
-    int keyLen = strlen(key);
-    for (int i = 0; i < textLen; i++) {
-        char c = text[i];
-        if (c >= 'A' && c <= 'Z') {
-            // Encrypt uppercase letters
-            text[i] = ((c - 'A' + key[i % keyLen] - 'A') % 26) + 'A';
-        } else if (c >= 'a' && c <= 'z') {
-            // Encrypt lowercase letters
-            text[i] = ((c - 'a' + key[i % keyLen] - 'A') % 26) + 'a';
-        }
-    }
-}
-// Function to perform Vigenere decryption
-void vigenereDecrypt(char *text, const char *key) {
-    int textLen = strlen(text);
-    int keyLen = strlen(key);
-    for (int i = 0; i < textLen; i++) {
-        char c = text[i];
-
-        if (c >= 'A' && c <= 'Z') {
-            // Decrypt uppercase letters
-            text[i] = ((c - 'A' - (key[i % keyLen] - 'A') + 26) % 26) + 'A';
-        } else if (c >= 'a' && c <= 'z') {
-            // Decrypt lowercase letters
-            text[i] = ((c - 'a' - (key[i % keyLen] - 'A') + 26) % 26) + 'a';
-        }
-    }
-}
-int main() {
-    const char *key = "VAR"; 
-    char message[] = "saveethaengineeringcollege";
-    printf("Simulating Vigenere Cipher:\n");
-    // Print the original plain text
-    printf("Original Message: %s\n", message);
-    // Print the key used
-    printf("Key: %s\n", key);
-    // Encrypt the message
-    vigenereEncrypt(message, key);
-    printf("Encrypted Message: %s\n", message);
-    // Decrypt the message back to the original
-    vigenereDecrypt(message, key);
-    printf("Decrypted Message: %s\n", message);
-    return 0;
-}
-```
-
+~~~
+ #include <stdio.h>
+ #include <string.h>
+ void vigenereCipher(char *text, char *key, int decrypt) {
+ int len = strlen(text), keyLen = strlen(key);
+ for (int i = 0; i < len; i++) {
+ int shift = key[i % keyLen]- 'A';
+ text[i] = 'A' + (text[i]- 'A' + (decrypt ? 26- shift : shift)) % 26;
+ }
+ }
+ int main() {
+ char text[] = "VARSHA", key[] = "KEY";
+ vigenereCipher(text, key, 0);
+ printf("Encrypted Message: %s\n", text);
+ vigenereCipher(text, key, 1);
+ printf("Decrypted Message: %s\n", text);
+ return 0;
+ }
+~~~
 ## OUTPUT
-![image](https://github.com/user-attachments/assets/64479558-d2a2-410b-bab8-731ccda89608)
-
+![cry ex 4](https://github.com/user-attachments/assets/33314483-be77-4cfb-b0b3-a8aff0a2cf83)
 
 ## RESULT
-The program is executed successfully
+The program is executed successfully.
